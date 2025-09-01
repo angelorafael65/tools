@@ -1,0 +1,3 @@
+service:
+  type: NodePort
+  nodePort: 30000  # El puerto que quieras usar

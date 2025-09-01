@@ -1,0 +1,5 @@
+kafka:
+  brokerConnect: "kafka.kafka.svc.cluster.local:9092"  # Cambia esta URL si es necesario
+
+service:
+  type: ClusterIP  # Puedes cambiar esto a LoadBalancer o NodePort si lo deseas

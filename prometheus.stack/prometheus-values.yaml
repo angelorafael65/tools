@@ -1,0 +1,49 @@
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
+    podMonitorSelector: {}
+    podMonitorNamespaceSelector: {}
+    retention: 10d
+    scrapeInterval: 15s
+    evaluationInterval: 15s
+ 
+grafana:
+  enabled: true
+  adminPassword: "prom-operator"
+  service:
+    type: ClusterIP
+    port: 80
+  ingress:
+    enabled: false  # cambia a true si usas Ingress
+  defaultDashboardsEnabled: true
+  sidecar:
+    dashboards:
+      enabled: true
+    datasources:
+      enabled: true
+ 
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    replicas: 1
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+ 
+kubeControllerManager:
+  enabled: true
+kubeScheduler:
+  enabled: true
+kubeEtcd:
+  enabled: true
+ 
+# Evita que falle si los componentes están fuera de este cluster (por ejemplo en EKS o GKE)
+coreDns:
+  enabled: false
+kubeProxy:
+  enabled: false
